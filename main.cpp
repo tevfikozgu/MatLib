@@ -15,7 +15,7 @@ private:
 public:
     Matrice(int, int);
     void init(T arr[]);
-    Matrice<T> operator*(const Matrice& a);
+    Matrice<T> operator*(const Matrice&);
     void row_col_mul(Matrice<T>&, Matrice<T>,int, int);
 };
 
