@@ -34,12 +34,12 @@ template<typename T>
 Matrice<T> Matrice<T>::operator*(const Matrice &Matrice_2)
 {
     Matrice <T> multiplicated(this->r, Matrice_2.c);
-    vector<std::thread> mul_threads(multiplicated.r + multiplicated.c);
+    vector<std::thread> mul_threads(multiplicated.r * multiplicated.c);
 
     for (int i = 0; i<r;i++)
         for (int j = 0; j<Matrice_2.c;j++)
-            mul_threads.push_back(thread(&Matrice<T>::row_col_mul, this,
-                                         ref(multiplicated), Matrice_2, i, j));
+            mul_threads[i * Matrice_2.c + j] = thread(&Matrice<T>::row_col_mul, this,
+                                               ref(multiplicated), Matrice_2, i, j);
 
     for (thread &t: mul_threads)
         if (t.joinable())
@@ -64,8 +64,7 @@ Matrice<T> Matrice<T>::operator+(const Matrice &Matrice_2)
     vector<std::thread> sum_threads(r);
 
     for (int i = 0; i<r;i++)
-        sum_threads.push_back(thread(&Matrice<T>::row_row_sum, this,
-                                         ref(sum_array), Matrice_2, i));
+        sum_threads[i] = thread(&Matrice<T>::row_row_sum, this, ref(sum_array), Matrice_2, i);
     for (thread &t: sum_threads)
         if (t.joinable())
             t.join();
@@ -85,8 +84,7 @@ Matrice<T> Matrice<T>::operator-(const Matrice &Matrice_2)
     Matrice <T> diff_array(this->r, this->c);
     vector<std::thread> diff_threads(r);
     for (int i = 0; i<r;i++)
-        diff_threads.push_back(thread(&Matrice<T>::row_row_diff, this,
-                                     ref(diff_array), Matrice_2, i));
+        diff_threads[i] = thread(&Matrice<T>::row_row_diff, this, ref(diff_array), Matrice_2, i);
 
     for (thread &t: diff_threads)
         if (t.joinable())
@@ -100,5 +98,4 @@ void Matrice<T>::row_row_diff(Matrice<T>& M1, Matrice<T> M2, int row_idx)
     std::transform(this->array[row_idx].begin(), this->array[row_idx].end(),
                    M2.array[row_idx].begin(), M1.array[row_idx].begin(), std::minus<T>());
 }
-
 
