@@ -2,3 +2,4 @@
 /eigen-3.4.0/
 /cmake-build-debug/
 /.idea
+/src/eigen_trials.cpp
