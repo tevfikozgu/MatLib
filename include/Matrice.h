@@ -5,7 +5,6 @@
 #ifndef MATRICE_LIBRARY
 #define MATRICE_LIBRARY
 
-
 #include <iostream>
 #include <vector>
 #include <thread>
@@ -25,8 +24,12 @@ public:
     void init(T arr[]);
 
     Matrice<T> operator*(const Matrice &);
+    Matrice<T> operator+(const Matrice &);
+    Matrice<T> operator-(const Matrice &);
 
-    void row_col_mul(Matrice<T> &, Matrice<T>, int, int);
+    void row_col_mul(Matrice<T>&, Matrice<T>, int, int);
+    void row_row_sum(Matrice<T>&, Matrice<T>, int);
+    void row_row_diff(Matrice<T>&, Matrice<T>, int);
 
     friend ostream & operator << (ostream &out, const Matrice<T>& Mat)
     {

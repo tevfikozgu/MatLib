@@ -2,8 +2,6 @@
 #include "Matrice.h"
 #include "Matrice.cpp"
 
-using namespace std;
-
 int main() {
 
     Matrice<double> Matrice_1(4,4);
@@ -22,15 +20,32 @@ int main() {
     Matrice_1.init(A);
     Matrice_2.init(B);
 
+//    /* Multiplication Operations */
+//    auto start = std::chrono::steady_clock::now();
+//    Matrice<double> Matrice_Mul = Matrice_1 * Matrice_2;
+//    auto end = std::chrono::steady_clock::now();
+//    std::chrono::duration<double> elapsed_seconds = end-start;
+//    std::cout << "Elapsed Time of Multiplication: " << elapsed_seconds.count() << "s\n";
+//    cout << Matrice_Mul;
+
+
+//    /* Summation Operations */
+//    auto start = std::chrono::steady_clock::now();
+//    Matrice<double> Matrice_Sum = Matrice_1 + Matrice_2;
+//    auto end = std::chrono::steady_clock::now();
+//    std::chrono::duration<double> elapsed_seconds = end-start;
+//    std::cout << "Elapsed Time of Summation: " << elapsed_seconds.count() << "s\n";
+//    cout << Matrice_Sum;
+
+
+    /* Negation Operations */
     auto start = std::chrono::steady_clock::now();
-
-    Matrice<double> Matrice_3 = Matrice_1 * Matrice_2;
-
+    Matrice<double> Matrice_Diff = Matrice_1 - Matrice_2;
     auto end = std::chrono::steady_clock::now();
     std::chrono::duration<double> elapsed_seconds = end-start;
-    std::cout << "Elapsed Time of Multiplication: " << elapsed_seconds.count() << "s\n";
+    std::cout << "Elapsed Time of Difference: " << elapsed_seconds.count() << "s\n";
+    cout << Matrice_Diff;
 
-    cout << Matrice_3;
 
-    return 0;
+    return EXIT_SUCCESS;
 }
