@@ -1,8 +1,9 @@
 /**
- * @Brief: This file contains Class structure of MatLib
- * @Writer: Tevfik Ozgu
- * @date: 03.03.2022
+ * @brief   : This file contains Class structure of MatLib
+ * @author  : Tevfik Özgü
+ * @date    : 03.03.2022
  */
+
 
 #ifndef MATRICE_LIBRARY
 #define MATRICE_LIBRARY
@@ -30,11 +31,15 @@ public:
     Matrice<T> operator*(const Matrice &);
     Matrice<T> operator+(const Matrice &);
     Matrice<T> operator-(const Matrice &);
-//    void operator=(const Matrice &){} // No Need to Overload, CPP handles by itself.
+
+    static Matrice<T> eye(int);
 
     void row_col_mul(Matrice<T>&, Matrice<T>, int, int);
     void row_row_sum(Matrice<T>&, Matrice<T>, int);
     void row_row_diff(Matrice<T>&, Matrice<T>, int);
+
+    void row_T(Matrice<T>&, int);
+    Matrice<T> t();
 
     friend ostream & operator << (ostream &out, const Matrice<T>& Mat)
     {
@@ -48,7 +53,6 @@ public:
         }
         return out;
     }
-
 };
 
 

@@ -1,7 +1,7 @@
 /**
- * @brief: This file includes headers and other things for main.cpp file.
- * @Writer: Tevfik Ozgu
- * @date: 04.03.2022
+ * @brief  :  This file includes headers and other things for main.cpp file.
+ * @author : Tevfik Ozgu
+ * @date   :   04.03.2022
  */
 
 #ifndef MATRICELIBRARY_MAIN_H

@@ -1,11 +1,15 @@
 /**
- * @Brief: This Source Code Includes Operations of Matrice Library with Multithreading.
- * @Writer: Tevfik Özgü
- * @Data: 03.03.2022
+ * @brief   : This Source Code Includes Operations of Matrice Library with Multithreading.
+ * @author  : Tevfik Özgü
+ * @date    : 03.03.2022
  */
 
 #include "../include/Matrice.h"
 
+/**
+ * @brief    : Default Constructor
+ * @tparam T : Type of Matrice Elements
+ */
 template<typename T>
 Matrice<T>::Matrice()
 {
@@ -15,7 +19,12 @@ Matrice<T>::Matrice()
     array = vec;
 }
 
-
+/**
+ * @brief         : Creates Identity Matrice with dimension (size, size).
+ * @tparam T      : Type of Matrice Elements
+ * @param row     : Row dimension of Matrice,
+ * @param column  : Column dimension of Matrice,
+ */
 template<typename T>
 Matrice<T>::Matrice(int row, int column)
 {
@@ -25,7 +34,11 @@ Matrice<T>::Matrice(int row, int column)
     array = vec;
 }
 
-
+/**
+ * @brief      : Copy Constructor that copies one matrice to another.
+ * @tparam T   : Type of Matrice Elements
+ * @param size : Right Matrice of = operator.
+ */
 template<typename T>
 Matrice<T>::Matrice(const Matrice<T>& Matrice_Old)
 {
@@ -35,6 +48,11 @@ Matrice<T>::Matrice(const Matrice<T>& Matrice_Old)
 }
 
 
+/**
+ * @brief      : Initializes array with given array
+ * @tparam T   : Type of Matrice Elements
+ * @param arr  : Array which is initalized to Matrice object.
+ */
 template<typename T>
 void Matrice<T>::init(T arr[])
 {
@@ -49,6 +67,13 @@ void Matrice<T>::init(T arr[])
 }
 
 
+/**
+ * @brief           : Overloading of * operator.
+ * @note            : There is a multithreaded system.
+ * @tparam T        : Type of Matrice Elements
+ * @param Matrice_2 : Right Matrice of * operator.
+ * @return          : Multiplication of 2 matrices which is a matrice.
+ */
 template<typename T>
 Matrice<T> Matrice<T>::operator*(const Matrice &Matrice_2)
 {
@@ -76,6 +101,13 @@ void Matrice<T>::row_col_mul(Matrice<T>& M1, Matrice<T> M2, int row_idx, int col
 }
 
 
+/**
+ * @brief           : Overloading of + operator.
+ * @note            : There is a multithreaded system.
+ * @tparam T        : Type of Matrice Elements
+ * @param Matrice_2 : Right Matrice of + operator.
+ * @return          : Summation of 2 matrices which is a matrice.
+ */
 template<typename T>
 Matrice<T> Matrice<T>::operator+(const Matrice &Matrice_2)
 {
@@ -97,6 +129,13 @@ void Matrice<T>::row_row_sum(Matrice<T>& M1, Matrice<T> M2, int row_idx)
 }
 
 
+/**
+ * @brief           : Overloading of - operator.
+ * @note            : There is a multithreaded system.
+ * @tparam T        : Type of Matrice Elements
+ * @param Matrice_2 : Right Matrice of - operator.
+ * @return          : Subtraction of 2 matrices which is a matrice.
+ */
 template<typename T>
 Matrice<T> Matrice<T>::operator-(const Matrice &Matrice_2)
 {
@@ -116,4 +155,47 @@ void Matrice<T>::row_row_diff(Matrice<T>& M1, Matrice<T> M2, int row_idx)
 {
     std::transform(this->array[row_idx].begin(), this->array[row_idx].end(),
                    M2.array[row_idx].begin(), M1.array[row_idx].begin(), std::minus<T>());
+}
+
+/**
+ * @brief      : This function returns Transpose of Matrice
+ * @note       : There is a multithreaded system.
+ * @tparam T   : Type of Matrice Elements
+ * @return     : Tranpose of Current Matrice
+ */
+template<typename T>
+Matrice<T> Matrice<T>::t()
+{
+    Matrice <T> transpose(this->c, this->r);
+    vector<std::thread> transpose_threads(r);
+    for (int i = 0; i<r;i++)
+        transpose_threads[i] = thread(&Matrice<T>::row_T, this, ref(transpose), i);
+
+    for (thread &t: transpose_threads)
+        if (t.joinable())
+            t.join();
+    return transpose;
+}
+template<typename T>
+void Matrice<T>::row_T(Matrice<T>& M1, int row_idx)
+{
+    for (int c_idx=0; c_idx < this->c; c_idx++)
+        M1.array[c_idx][row_idx] = this->array[row_idx][c_idx];
+}
+
+
+/**
+ * @brief      : Creates Identity Matrice with dimension (size, size).
+ * @note       : There is no multihread, because it is slower.
+ * @tparam T   : Type of Matrice Elements
+ * @param size : Dimensions of Matrice
+ * @return     : Identity Matrice with dimension of (size, size)
+ */
+template<typename T>
+Matrice<T> Matrice<T>::eye(int size)
+{
+    Matrice <T> M(size, size);
+    for (int i = 0; i<size;i++)
+        M.array[i][i] = 1;
+    return M;
 }
