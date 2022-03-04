@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Matrice.h"
-#include "Matrice.cpp"
+#include "include/Matrice.h"
+#include "src/Matrice.cpp"
 
 int main() {
 
