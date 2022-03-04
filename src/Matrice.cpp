@@ -1,7 +1,7 @@
-/*
+/**
  * @Brief: This Source Code Includes Operations of Matrice Library with Multithreading.
  * @Writer: Tevfik Özgü
- * @Data: 3.03.2022
+ * @Data: 03.03.2022
  */
 
 #include "Matrice.h"
