@@ -27,6 +27,7 @@ int main()
     auto end = std::chrono::steady_clock::now();
     std::chrono::duration<double> elapsed_seconds = end-start;
     cout << "elapsed time EIGEN: " << elapsed_seconds.count() << "s\n";
+    cout << m3;
     /* */
 
     return 0;
