@@ -1,6 +1,6 @@
-#include <iostream>
-#include "include/Matrice.h"
-#include "src/Matrice.cpp"
+#include "../include/main.h"
+
+// TODO: Update main.cpp file for testing.
 
 int main() {
 
@@ -23,6 +23,8 @@ int main() {
     cout << "Summation: 1"                 << endl
          << "Difference: 2"                << endl
          << "Multiplication: 3"            << endl
+         << "Copy Matrice: 4"              << endl
+         << "Equalize Matrices: 5"         << endl
          << "Exit: -1"                     << endl
          << "Operation You Want to Make: ";
 
@@ -63,6 +65,30 @@ int main() {
                 std::chrono::duration<double> elapsed_seconds = end - start;
                 std::cout << "Elapsed Time of Multiplication: " << elapsed_seconds.count() << "s\n";
                 cout << Matrice_Mul;
+                break;
+            }
+            case 4: /* Multiplication Operations */
+            {
+                auto start = std::chrono::steady_clock::now();
+                Matrice<double> New_Matrice = Matrice_1;
+                auto end = std::chrono::steady_clock::now();
+                std::chrono::duration<double> elapsed_seconds = end - start;
+                std::cout << "Elapsed Time of Copy Constructor: " << elapsed_seconds.count() << "s\n";
+                cout << New_Matrice;
+                break;
+            }
+            case 5: /* Multiplication Operations */
+            {
+                Matrice<double> New_Matrice = Matrice_1;
+                cout << "Old Matrice: "<< endl;
+                cout << New_Matrice;
+                auto start  = std::chrono::steady_clock::now();
+                New_Matrice = Matrice_2;
+                auto end    = std::chrono::steady_clock::now();
+                std::chrono::duration<double> elapsed_seconds = end - start;
+                std::cout << "Elapsed Time of Equalization: " << elapsed_seconds.count() << "s\n";
+                cout << "New Matrice: "<< endl;
+                cout << New_Matrice;
                 break;
             }
             default: {

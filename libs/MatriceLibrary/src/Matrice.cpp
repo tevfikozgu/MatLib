@@ -7,12 +7,31 @@
 #include "../include/Matrice.h"
 
 template<typename T>
+Matrice<T>::Matrice()
+{
+    r = 0;
+    c = 0;
+    vector<vector<T>> vec;
+    array = vec;
+}
+
+
+template<typename T>
 Matrice<T>::Matrice(int row, int column)
 {
     r = row;
     c = column;
     vector<vector<T> > vec(row, vector<T> (column, 0));
     array = vec;
+}
+
+
+template<typename T>
+Matrice<T>::Matrice(const Matrice<T>& Matrice_Old)
+{
+    this->array = Matrice_Old.array;
+    this->r     = Matrice_Old.r;
+    this->c     = Matrice_Old.c;
 }
 
 
@@ -98,4 +117,3 @@ void Matrice<T>::row_row_diff(Matrice<T>& M1, Matrice<T> M2, int row_idx)
     std::transform(this->array[row_idx].begin(), this->array[row_idx].end(),
                    M2.array[row_idx].begin(), M1.array[row_idx].begin(), std::minus<T>());
 }
-

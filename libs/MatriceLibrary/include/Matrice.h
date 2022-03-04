@@ -1,6 +1,8 @@
-//
-// Created by Tevfik Özgü on 3.03.2022.
-//
+/**
+ * @Brief: This file contains Class structure of MatLib
+ * @Writer: Tevfik Ozgu
+ * @date: 03.03.2022
+ */
 
 #ifndef MATRICE_LIBRARY
 #define MATRICE_LIBRARY
@@ -19,13 +21,16 @@ private:
     vector<vector<T> > array;
     int r, c;
 public:
+    Matrice();
     Matrice(int, int);
+    Matrice(const Matrice<T>&);
 
     void init(T arr[]);
 
     Matrice<T> operator*(const Matrice &);
     Matrice<T> operator+(const Matrice &);
     Matrice<T> operator-(const Matrice &);
+//    void operator=(const Matrice &){} // No Need to Overload, CPP handles by itself.
 
     void row_col_mul(Matrice<T>&, Matrice<T>, int, int);
     void row_row_sum(Matrice<T>&, Matrice<T>, int);
