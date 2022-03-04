@@ -34,6 +34,7 @@ int main() {
          << "Copy Matrice: 4"              << endl
          << "Equalize Matrices: 5"         << endl
          << "Matrice Transpose: 6"         << endl
+         << "Identity Matrice: 7"          << endl
          << "Exit: -1"                     << endl
          << "Operation You Want to Make: ";
 
