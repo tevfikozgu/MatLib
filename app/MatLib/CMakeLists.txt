@@ -5,7 +5,8 @@ file(GLOB_RECURSE SOURCES "src/*.cpp" "include/*.h")
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-target_link_libraries(${PROJECT_NAME}
-                      PRIVATE
-                      libs::MatriceLibrary
-                      )
+target_link_libraries(
+        ${PROJECT_NAME}
+          PRIVATE
+          libs::MatriceLibrary
+)

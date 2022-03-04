@@ -1,2 +1,2 @@
 add_subdirectory(MatriceLibrary)
-#add_subdirectory(EigenLibrary)
+add_subdirectory(EigenLibrary)
