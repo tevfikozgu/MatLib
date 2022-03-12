@@ -233,3 +233,122 @@ Matrice<T> Matrice<T>::eye(int size)
         M.array[i][i] = 1;
     return M;
 }
+
+
+/*********** Functions For Finding Inverse Of A Matrice ****************/
+template<typename T>
+void Matrice<T>::get_cofactor(Matrice<T> &A,Matrice<T> &temp, int p, int q, int n)
+{
+    int i = 0, j = 0;
+
+    // Looping for each element of the matrix
+    for (int row = 0; row < n; row++)
+    {
+        for (int col = 0; col < n; col++)
+        {
+            //  Copying into temporary matrix only those element
+            //  which are not in given row and column
+            if (row != p && col != q)
+            {
+                temp.array[i][j++] = A.array[row][col];
+                // Row is filled, so increase row index and
+                // reset col index
+                if (j == n - 1)
+                {
+                    j = 0;
+                    i++;
+                }
+            }
+        }
+    }
+}
+
+template<typename T>
+T Matrice<T>::determinant(Matrice<T>& A, int n)
+{
+
+    T D = 0; // Initialize result
+
+    //  Base case : if matrix contains single element
+    if (n == 1)
+        return A.array[0][0];
+
+    Matrice<T> temp_mat(r,c); // To store cofactors
+
+    int sign = 1;  // To store sign multiplier
+
+    // Iterate for each element of first row
+    for (int f = 0; f < n; f++)
+    {
+        // Getting Cofactor of A[0][f]
+        get_cofactor(A, temp_mat, 0, f, n);
+
+        D += sign * A.array[0][f] * determinant(temp_mat, n-1);
+        // terms are to be added with alternate sign
+        sign = -sign;
+    }
+
+    return D;
+
+}
+
+template<typename T>
+Matrice<T> Matrice<T>::adjoint()
+{
+    Matrice<T> adjoint_mat(r,c);
+    Matrice<T> temp_mat(r,c);
+    if (r == 1)
+    {
+        adjoint_mat.array[0][0] = 1;
+        return adjoint_mat;
+    }
+
+    // temp is used to store cofactors of A[][]
+    int sign;
+
+    for (int i=0; i<r; i++)
+    {
+        for (int j=0; j<c; j++)
+        {
+            // Get cofactor of A[i][j]
+            get_cofactor(*this,temp_mat, i, j, r);
+
+            // sign of adj[j][i] positive if sum of row
+            // and column indexes is even.
+            sign = ((i+j)%2==0)? 1: -1;
+
+            // Interchanging rows and columns to get the
+            // transpose of the cofactor matrix
+            adjoint_mat.array[j][i] = (sign)*(determinant(temp_mat, r-1));
+        }
+    }
+    return adjoint_mat;
+}
+
+template<typename T>
+Matrice<T> Matrice<T>::inv() {
+
+    Matrice<T> inverse_mat(r,c);
+
+    if (r != c)
+    {
+        cout << "This is not a square matrice" << endl;
+        return inverse_mat;
+    }
+
+    T det = determinant(*this, r);
+    if (det == 0)
+    {
+        cout << "Singular matrix, can't find its inverse" << endl;
+        return inverse_mat;
+    }
+
+    Matrice<T> adjoint_mat = adjoint();
+
+    // Find Inverse using formula "inverse(A) = adj(A)/det(A)"
+    for (int i=0; i<r; i++)
+        for (int j=0; j<c; j++)
+            inverse_mat.array[i][j] = adjoint_mat.array[i][j] / float(det);
+
+    return inverse_mat;
+}
