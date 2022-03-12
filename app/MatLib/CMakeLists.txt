@@ -1,7 +1,7 @@
 project(MatLib)
 set(CMAKE_CXX_STANDARD 17)
 
-file(GLOB_RECURSE SOURCES "src/*.cpp" "include/*.h")
+file(GLOB_RECURSE SOURCES "src/main.cpp" "include/*.h")
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 

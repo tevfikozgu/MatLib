@@ -14,19 +14,16 @@ int main() {
     Matrice<double> Matrice_1(5,4);
     Matrice<double> Matrice_2(4,4);
 
-    double A[] = {1,2,3,4,
-                  5,6,7,8,
-                  5,6,7,8,
-                  5,6,7,8,
-                  5,6,9,1};
+    Matrice_1 << 1,2,3,4,
+                 5,6,7,8,
+                 5,6,7,8,
+                 5,6,7,8,
+                 5,6,9,1;
 
-    double B[] = {2,4,1,8,
-                  7,2,3,1,
-                  5,6,7,8,
-                  3,2,6,1};
-
-    Matrice_1.init(A);
-    Matrice_2.init(B);
+    Matrice_2 << 2,4,1,8,
+                 7,2,3,1,
+                 5,6,7,8,
+                 3,2,6,1;
 
     cout << "Summation: 1"                 << endl
          << "Difference: 2"                << endl
@@ -35,6 +32,7 @@ int main() {
          << "Equalize Matrices: 5"         << endl
          << "Matrice Transpose: 6"         << endl
          << "Identity Matrice: 7"          << endl
+         << "Inverse Matrice: 8"           << endl
          << "Exit: -1"                     << endl
          << "Operation You Want to Make: ";
 
@@ -125,6 +123,19 @@ int main() {
                 cout << New_Matrice;
                 break;
             }
+
+            case 8: /* Finding Inverse Matrice */
+            {
+                auto start  = std::chrono::steady_clock::now();
+                Matrice<double> New_Matrice = Matrice_2.inv();
+                auto end    = std::chrono::steady_clock::now();
+                std::chrono::duration<double> elapsed_seconds = end - start;
+                std::cout << "Elapsed Time of Inverse Finding: " << elapsed_seconds.count() << "s\n";
+                cout << "New Matrice: "<< endl;
+                cout << New_Matrice;
+                break;
+            }
+
             default: {
                 cout << "Wrong Selection" << endl;
                 break;
