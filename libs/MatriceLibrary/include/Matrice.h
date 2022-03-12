@@ -20,7 +20,8 @@ template<typename T>
 class Matrice {
 private:
     vector<vector<T>> array;
-    int r, c;
+    int r{}, c{};
+    int r_curr{}, c_curr{};
 public:
 
     Matrice();
