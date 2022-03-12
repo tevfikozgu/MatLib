@@ -20,7 +20,7 @@ Matrice<T>::Matrice()
 }
 
 /**
- * @brief         : Creates Identity Matrice with dimension (size, size).
+ * @brief         : Creates Zeros Matrice with dimension (size, size).
  * @tparam T      : Type of Matrice Elements
  * @param row     : Row dimension of Matrice,
  * @param column  : Column dimension of Matrice,
@@ -45,6 +45,40 @@ Matrice<T>::Matrice(const Matrice<T>& Matrice_Old)
     this->array = Matrice_Old.array;
     this->r     = Matrice_Old.r;
     this->c     = Matrice_Old.c;
+}
+
+
+/**
+ * @brief           : Overloading of << operator.
+ * @tparam T        : Type of Matrice Elements
+ * @param value     : Value which will be assigned to indice.
+ * @return          : Reference to current assigned matrice.
+ */
+template<typename T>
+Matrice<T>& Matrice<T>::operator<<(T value)
+{
+    this->array[r_curr][c_curr] = value;
+    return *this;
+}
+
+
+/**
+ * @brief           : Overloading of , operator.
+ * @tparam T        : Type of Matrice Elements
+ * @param value     : Value which will be assigned to indice.
+ * @return          : Reference to current assigned matrice.
+ */
+template<typename T>
+Matrice<T>& Matrice<T>::operator,(T value)
+{
+    if (c_curr == c - 1) {
+        r_curr += 1;
+        c_curr = 0;
+    } else{
+        c_curr += 1;
+    }
+    this->array[r_curr][c_curr] = value;
+    return *this;
 }
 
 

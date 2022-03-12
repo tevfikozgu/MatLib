@@ -34,6 +34,8 @@ public:
     Matrice<T> operator*(const Matrice &);
     Matrice<T> operator+(const Matrice &);
     Matrice<T> operator-(const Matrice &);
+    Matrice<T>& operator<<(T);
+    Matrice<T>& operator,(T);
 
     void row_col_mul(Matrice<T>&, Matrice<T>, int, int);
     void row_row_sum(Matrice<T>&, Matrice<T>, int);
@@ -49,9 +51,7 @@ public:
         for (int i=0;i<Mat.r;i++)
         {
             for(int j=0;j<Mat.c;j++)
-            {
                 out << Mat.array[i][j] << "\t";
-            }
             out << endl;
         }
         return out;
