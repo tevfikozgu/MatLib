@@ -32,19 +32,20 @@ public:
 
     void init(T arr[]);
 
-    Matrice<T> operator*(const Matrice &);
-    Matrice<T> operator+(const Matrice &);
-    Matrice<T> operator-(const Matrice &);
+    Matrice<T>  operator*(const Matrice &);
+    Matrice<T>  operator+(const Matrice &);
+    Matrice<T>  operator-(const Matrice &);
     Matrice<T>& operator<<(T);
     Matrice<T>& operator,(T);
 
+private:
     void row_col_mul(Matrice<T>&, Matrice<T>, int, int);
     void row_row_sum(Matrice<T>&, Matrice<T>, int);
     void row_row_diff(Matrice<T>&, Matrice<T>, int);
-
-    Matrice<T> t();
     void row_T(Matrice<T>&, int);
 
+public:
+    Matrice<T>        t();
     static Matrice<T> eye(int);
     Matrice<T>        inv();
     T                 det();
@@ -52,8 +53,9 @@ private:
 
     T          determinant(Matrice<T>&, int);
     Matrice<T> adjoint();
-    void get_cofactor(Matrice<T> &,Matrice<T>&, int, int, int);
+    void       get_cofactor(Matrice<T> &,Matrice<T>&, int, int, int);
 
+public:
     friend ostream & operator << (ostream &out, const Matrice<T>& Mat)
     {
         for (int i=0;i<Mat.r;i++)
