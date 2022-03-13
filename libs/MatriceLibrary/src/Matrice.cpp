@@ -111,6 +111,13 @@ void Matrice<T>::init(T arr[])
 template<typename T>
 Matrice<T> Matrice<T>::operator*(const Matrice &Matrice_2)
 {
+
+    if (this->c != Matrice_2.r)
+    {
+        std::cerr << " Column size of First matrice must be same with Row Size of Second Matrice! " << std::endl;
+        abort();
+    }
+
     Matrice <T> multiplicated(this->r, Matrice_2.c);
     vector<std::thread> mul_threads(multiplicated.r * multiplicated.c);
 
@@ -145,6 +152,13 @@ void Matrice<T>::row_col_mul(Matrice<T>& M1, Matrice<T> M2, int row_idx, int col
 template<typename T>
 Matrice<T> Matrice<T>::operator+(const Matrice &Matrice_2)
 {
+
+    if (this->r != Matrice_2.r || this->c != Matrice_2.c)
+    {
+        std::cerr << " Matrice Sizes Must Be Same! " << std::endl;
+        abort();
+    }
+
     Matrice <T> sum_array(this->r, this->c);
     vector<std::thread> sum_threads(r);
 
@@ -173,6 +187,12 @@ void Matrice<T>::row_row_sum(Matrice<T>& M1, Matrice<T> M2, int row_idx)
 template<typename T>
 Matrice<T> Matrice<T>::operator-(const Matrice &Matrice_2)
 {
+    if (this->r != Matrice_2.r || this->c != Matrice_2.c)
+    {
+        std::cerr << " Matrice Sizes Must Be Same! " << std::endl;
+        abort();
+    }
+
     Matrice <T> diff_array(this->r, this->c);
     vector<std::thread> diff_threads(r);
     for (int i = 0; i<r;i++)
@@ -328,19 +348,17 @@ Matrice<T> Matrice<T>::adjoint()
 template<typename T>
 Matrice<T> Matrice<T>::inv() {
 
-    Matrice<T> inverse_mat(r,c);
-
     if (r != c)
     {
-        cout << "This is not a square matrice" << endl;
-        return inverse_mat;
+        cout << " Cannot Take Inverse of a Non-Square Matrice! " << endl;
+        abort();
     }
 
     T det = determinant(*this, r);
     if (det == 0)
     {
-        cout << "Singular matrix, can't find its inverse" << endl;
-        return inverse_mat;
+        cerr << "Singular matrix, can't find its inverse" << endl;
+        abort();
     }
 
     Matrice<T> adjoint_mat = adjoint();
