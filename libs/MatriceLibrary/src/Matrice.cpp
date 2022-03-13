@@ -283,6 +283,23 @@ void Matrice<T>::get_cofactor(Matrice<T> &A,Matrice<T> &temp, int p, int q, int 
     }
 }
 
+/**
+ *
+ * @tparam T : Matrice Data Type
+ * @return   : Determinant Of given matrice
+ */
+template<typename T>
+T Matrice<T>::det()
+{
+    if (r != c)
+    {
+        cout << " Cannot Take Inverse of a Non-Square Matrice! " << endl;
+        abort();
+    }
+
+    return determinant(*this, r);
+}
+
 template<typename T>
 T Matrice<T>::determinant(Matrice<T>& A, int n)
 {
@@ -354,7 +371,7 @@ Matrice<T> Matrice<T>::inv() {
         abort();
     }
 
-    T det = determinant(*this, r);
+    T det = this->det();
     if (det == 0)
     {
         cerr << "Singular matrix, can't find its inverse" << endl;

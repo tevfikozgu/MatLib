@@ -46,9 +46,11 @@ public:
     void row_T(Matrice<T>&, int);
 
     static Matrice<T> eye(int);
+    Matrice<T>        inv();
+    T                 det();
+private:
 
-    Matrice<T> inv();
-    T determinant(Matrice<T>&, int);
+    T          determinant(Matrice<T>&, int);
     Matrice<T> adjoint();
     void get_cofactor(Matrice<T> &,Matrice<T>&, int, int, int);
 
