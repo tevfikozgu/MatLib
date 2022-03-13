@@ -124,7 +124,7 @@ int main() {
                 break;
             }
 
-            case 8: /* Finding Inverse Matrice */
+            case 8: /* Finding Inverse of a Matrice */
             {
                 auto start  = std::chrono::steady_clock::now();
                 Matrice<double> New_Matrice = Matrice_2.inv();

@@ -13,17 +13,19 @@
 template<typename T>
 Matrice<T>::Matrice()
 {
-    r = 0;
-    c = 0;
-    vector<vector<T>> vec;
-    array = vec;
+
+    r      = 0;
+    c      = 0;
+    r_curr = 0;
+    c_curr = 0;
+
 }
 
 /**
  * @brief         : Creates Zeros Matrice with dimension (size, size).
  * @tparam T      : Type of Matrice Elements
- * @param row     : Row dimension of Matrice,
- * @param column  : Column dimension of Matrice,
+ * @param row     : Row dimension of Matrice
+ * @param column  : Column dimension of Matrice
  */
 template<typename T>
 Matrice<T>::Matrice(int row, int column)
@@ -256,6 +258,20 @@ Matrice<T> Matrice<T>::eye(int size)
 
 
 /*********** Functions For Finding Inverse Of A Matrice ****************/
+/**
+ * @authors    : This inverse functions are written by GeeksForGeeks and some Additions are done by Tevfik Ozgu
+ * @cite       : https://www.geeksforgeeks.org/adjoint-inverse-matrix/
+ * @date       : 12.03.2022
+ * @brief      : These functions provide to get inverse of a matrice.
+ */
+
+
+/**
+ * @brief      : This function returns cofactor of a matrice
+ * @tparam T   : Main Matrice data type.
+ * @param A    : Main Matrice
+ * @param temp : Temporary Main Matrice
+ */
 template<typename T>
 void Matrice<T>::get_cofactor(Matrice<T> &A,Matrice<T> &temp, int p, int q, int n)
 {
@@ -347,6 +363,7 @@ Matrice<T> Matrice<T>::adjoint()
     {
         for (int j=0; j<c; j++)
         {
+            // TODO: Calculate coefficients and value of adjoint by using threads.
             // Get cofactor of A[i][j]
             get_cofactor(*this,temp_mat, i, j, r);
 
@@ -362,6 +379,10 @@ Matrice<T> Matrice<T>::adjoint()
     return adjoint_mat;
 }
 
+/**
+ * @tparam T Given Matrice Data Type
+ * @return   Returns Inverse of Given Matrice
+ */
 template<typename T>
 Matrice<T> Matrice<T>::inv() {
 
@@ -378,6 +399,7 @@ Matrice<T> Matrice<T>::inv() {
         abort();
     }
 
+    Matrice<T> inverse_mat(r,c);
     Matrice<T> adjoint_mat = adjoint();
 
     // Find Inverse using formula "inverse(A) = adj(A)/det(A)"
@@ -387,3 +409,6 @@ Matrice<T> Matrice<T>::inv() {
 
     return inverse_mat;
 }
+
+/************* End Of Functions For Finding Inverse Of A Matrice ****************/
+
