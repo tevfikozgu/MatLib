@@ -54,16 +54,8 @@ private:
     void       get_cofactor(Matrice<T> &,Matrice<T>&, int, int, int);
 
 public:
-    friend ostream & operator << (ostream &out, const Matrice<T>& Mat)
-    {
-        for (int i=0;i<Mat.r;i++)
-        {
-            for(int j=0;j<Mat.c;j++)
-                out << Mat.array[i][j] << "\t";
-            out << endl;
-        }
-        return out;
-    }
+    template<typename V>
+    friend ostream & operator << (ostream &out, const Matrice<V>& Mat);
 
 };
 

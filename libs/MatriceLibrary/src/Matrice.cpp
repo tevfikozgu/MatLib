@@ -391,3 +391,22 @@ Matrice<T> Matrice<T>::inv() {
 
 /************* End Of Functions For Finding Inverse Of A Matrice ****************/
 
+
+/**
+ *
+ * @tparam V
+ * @param out
+ * @param Mat
+ * @return
+ */
+template <typename V>
+ostream & operator<<(ostream &out, const Matrice<V>& Mat)
+{
+    for (int i=0;i<Mat.r;i++)
+    {
+        for(int j=0;j<Mat.c;j++)
+            out << Mat.array[i][j] << "\t";
+        out << endl;
+    }
+    return out;
+}
