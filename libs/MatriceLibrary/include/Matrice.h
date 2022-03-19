@@ -30,8 +30,6 @@ public:
 
     ~Matrice() = default;
 
-    void init(T arr[]);
-
     Matrice<T>  operator*(const Matrice &);
     Matrice<T>  operator+(const Matrice &);
     Matrice<T>  operator-(const Matrice &);

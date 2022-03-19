@@ -13,12 +13,10 @@
 template<typename T>
 Matrice<T>::Matrice()
 {
-
     r      = 0;
     c      = 0;
     r_curr = 0;
     c_curr = 0;
-
 }
 
 /**
@@ -81,25 +79,6 @@ Matrice<T>& Matrice<T>::operator,(T value)
     }
     this->array[r_curr][c_curr] = value;
     return *this;
-}
-
-
-/**
- * @brief      : Initializes array with given array
- * @tparam T   : Type of Matrice Elements
- * @param arr  : Array which is initalized to Matrice object.
- */
-template<typename T>
-void Matrice<T>::init(T arr[])
-{
-    for (int i = 0; i<r;i++)
-    {
-        for (int j = 0; j<c;j++)
-        {
-            int index   = i * c + j;
-            array[i][j] = arr[index];
-        }
-    }
 }
 
 
